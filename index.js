@@ -1,6 +1,7 @@
 // setup server
 const express = require('express');
 const app     = express();
+const port = process.env.port || 8080;
 
 // setup directory used to serve static files
 app.use(express.static('public'));
@@ -184,6 +185,6 @@ app.get('/account/all', function (req, res) {
 
 });
 
-app.listen(3000, function(){
+app.listen(port, function(){
     console.log('Running on port 3000');
 });
