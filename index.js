@@ -36,22 +36,27 @@ app.get('/account/create/:name/:email/:password', function (req, res) {
     // Create account route
     // return success or failure string
 
-    var account = {
-        name        : req.params.name,
-        email       : req.params.email,
-        balance     : 0,
-        password    : req.params.password,
-        transactions: [{
-            'action'      : 'create',
-            'amount'      : 0,
-            'timestamp'   : new Date().toDateString()
-        }]
-    };
-
-    db.get('accounts').push(account).write();
-    res.send(db.get('accounts').value());
-    console.log('Account Created!')
-    console.log(db.get('accounts').value());
+    if (db.get('accounts').find({email: req.params.email}).value()){
+        res.send('Account already exists');
+    }
+    else{
+        var account = {
+            name        : req.params.name,
+            email       : req.params.email,
+            balance     : 0,
+            password    : req.params.password,
+            transactions: [{
+                'action'      : 'create',
+                'amount'      : 0,
+                'timestamp'   : new Date().toDateString()
+            }]
+        };
+    
+        db.get('accounts').push(account).write();
+        res.send(db.get('accounts').value());
+        console.log('Account Created!')
+        console.log(db.get('accounts').value());
+    }
 });
 
 app.get('/account/login/:email/:password', function (req, res) {
@@ -67,7 +72,7 @@ app.get('/account/login/:email/:password', function (req, res) {
         res.send(null);
     }
 
-    if(client.password == req.params.password){
+    else if(client.password == req.params.password){
 
         res.send(db.get('accounts').find({email: req.params.email}).value());
         console.log('Login Successful');
@@ -99,11 +104,12 @@ app.get('/account/get/:email', function (req, res) {
         console.log('Account not found.');
         res.send(null);
     }
-
-    res.send(db.get('accounts').find({email: req.params.email}).value());
-    console.log('Balance Check Successful');
-
-    console.log(client);
+    else {
+        res.send(db.get('accounts').find({email: req.params.email}).value());
+        console.log('Balance Check Successful');
+    
+        console.log(client);
+    }
 });
 
 app.get('/account/deposit/:email/:amount', function (req, res) {
@@ -146,17 +152,20 @@ app.get('/account/withdraw/:email/:amount', function (req, res) {
         res.send(null);
     }
 
-    if (client.balance < req.params.amount){
-        res.send('Overdrawn') // need to redo this 
-    }
-        
-    else{
-        client.balance -= parseInt(req.params.amount);
+    else {
+        if (client.balance < req.params.amount){
+            res.send('Overdrawn');
+        }
+            
+        else{
+            client.balance -= parseInt(req.params.amount)
+            res.send(db.get('accounts').find({email: req.params.email}).value());
+            console.log('Withdraw Successful');
+            console.log(client);  
+        }
     }
 
-    res.send(db.get('accounts').find({email: req.params.email}).value());
-    console.log('Withdraw Successful');
-    console.log(client);    
+
 });
 
 app.get('/account/transactions/:email', function (req, res) {
@@ -169,10 +178,13 @@ app.get('/account/transactions/:email', function (req, res) {
         res.send(null);
     }
 
-    res.send(db.get('accounts').find({email: req.params.email}).value());
-    console.log('Transactioins Sent');
+    else {
+        res.send(db.get('accounts').find({email: req.params.email}).value());
+        console.log('Transactioins Sent');
+    
+        console.log(client);
+    }
 
-    console.log(client);
 });
 
 app.get('/account/all', function (req, res) {
