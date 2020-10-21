@@ -44,7 +44,7 @@ app.get('/account/create/:name/:email/:password', function (req, res) {
         transactions: [{
             'action'      : 'create',
             'amount'      : 0,
-            'timestamp'   : Date.now()
+            'timestamp'   : new Date().toDateString()
         }]
     };
 
@@ -74,7 +74,7 @@ app.get('/account/login/:email/:password', function (req, res) {
         client.transactions.push({
                 'action': 'login',
                 'amount': 0,
-                'timestamp': Date.now()
+                'timestamp': new Date().toDateString()
             });
         console.log(client);
     }
@@ -84,7 +84,7 @@ app.get('/account/login/:email/:password', function (req, res) {
         client.transactions.push({
                 'action': 'failed_login',
                 'amount': 0,
-                'timestamp': Date.now()
+                'timestamp': new Date().toDateString()
             });
         console.log(client);
     }
@@ -122,7 +122,7 @@ app.get('/account/deposit/:email/:amount', function (req, res) {
     client.transactions.push({
             'action': 'deposit',
             'amount': parseInt(req.params.amount),
-            'timestamp': Date.now()
+            'timestamp': new Date().toDateString()
         });
 
     client.balance += parseInt(req.params.amount);
@@ -179,12 +179,11 @@ app.get('/account/all', function (req, res) {
 
     // YOUR CODE
     // Return data for all accounts
-
-    res.send(db.get('account').value());
+    res.send(db.get("accounts").value());
     console.log('Accounts Sent');
 
 });
 
 app.listen(port, function(){
-    console.log('Running on port 3000');
+    console.log('App running ');
 });

@@ -1,3 +1,56 @@
 {
-  "accounts": []
+  "accounts": [
+    {
+      "name": "Chris",
+      "email": "cmichaels13@gmail.com",
+      "balance": 0,
+      "password": "Password",
+      "transactions": [
+        {
+          "action": "create",
+          "amount": 0,
+          "timestamp": 1603303051618
+        }
+      ]
+    },
+    {
+      "name": "Bob",
+      "email": "bob@ford.com",
+      "balance": 0,
+      "password": "Password",
+      "transactions": [
+        {
+          "action": "create",
+          "amount": 0,
+          "timestamp": 1603303111739
+        }
+      ]
+    },
+    {
+      "name": "Chris",
+      "email": "test@test.edu",
+      "balance": 0,
+      "password": "Password",
+      "transactions": [
+        {
+          "action": "create",
+          "amount": 0,
+          "timestamp": "2020-10-21T18:16:53.079Z"
+        }
+      ]
+    },
+    {
+      "name": "myTest",
+      "email": "myTest@test.edu",
+      "balance": 0,
+      "password": "Password",
+      "transactions": [
+        {
+          "action": "create",
+          "amount": 0,
+          "timestamp": "Wed Oct 21 2020"
+        }
+      ]
+    }
+  ]
 }

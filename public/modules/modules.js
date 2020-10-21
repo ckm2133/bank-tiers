@@ -89,7 +89,7 @@ ui.withdraw = `
 
 ui.transactions = `
     <!-- ------------- YOUR CODE: Transactions UI ------------- --> 
-    <div class="card bg-warning mb-3" style="max-width: 18rem;">
+    <div class="card bg-warning mb-3" style="max-width: 25rem;">
     <div class="card-header"><h3>Transactions</h3></div>
     <div class="card-body">
       <h5 class="card-title">Enter your email to see a list of your recent transactions.</h5>
@@ -138,12 +138,13 @@ ui.default = `
 
 ui.allData = `
     <!-- ------------- YOUR CODE: All Data UI ------------- --> 
-    <div class="card bg-light mb-3" style="max-width: 18rem;">
+    <div class="card bg-light mb-3" style="max-width: 25rem;">
     <div class="card-header"><h3>All Accounts</h3></div>
     <div class="card-body">
       <h5 class="card-title">Click the button below to retrieve account data for all accounts.</h5>
         <br>
       <button class="btn my-2 my-sm-0" type="submit" onclick = "allData()">Get Accounts</button>
+      <br>
       <br>
       <p class="card-text" id = 'status'></p>
     </div>
