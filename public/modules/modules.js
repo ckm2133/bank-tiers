@@ -17,7 +17,7 @@ ui.createAccount = `
       <input class = "form-control mr-sm-2" id='email' type="text" placeholder="Enter email">
         <br>
       <p class="card-text">Password</p>
-      <input class = "form-control mr-sm-2" id='password' type="text" placeholder="Enter password">
+      <input class = "form-control mr-sm-2" id='password' type="password" placeholder="Enter password">
 
     <br>
       <button class="btn my-2 my-sm-0" type="submit" onclick = "create()">Create Account</button>
@@ -37,7 +37,7 @@ ui.login = `
       <input class = "form-control mr-sm-2" id='email' type="text" placeholder="Enter email">
         <br>
       <p class="card-text">Password</p>
-      <input class = "form-control mr-sm-2" id='password' type="text" placeholder="Enter password">
+      <input class = "form-control mr-sm-2" id='password' type="password" placeholder="Enter password">
 
     <br>
       <button class="btn my-2 my-sm-0" type="submit" onclick = "login()">Login</button>
