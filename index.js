@@ -146,7 +146,7 @@ app.get('/account/withdraw/:email/:amount', function (req, res) {
     // return success or failure string
     client = db.get('accounts').find({email: req.params.email}).value();
     
-
+    console.log(client)
     if(client == null){
         console.log('Account not found.');
         res.send(null);
@@ -159,6 +159,13 @@ app.get('/account/withdraw/:email/:amount', function (req, res) {
             
         else{
             client.balance -= parseInt(req.params.amount)
+
+            client.transactions.push({
+                'action': 'withdrawal',
+                'amount': parseInt(req.params.amount),
+                'timestamp': new Date().toDateString()
+            });
+
             res.send(db.get('accounts').find({email: req.params.email}).value());
             console.log('Withdraw Successful');
             console.log(client);  
